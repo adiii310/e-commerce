@@ -23,7 +23,7 @@ export const Menswear = [
         verified: true,
         alt: 'alt2',
         imgUrl: 'https://rukminim2.flixcart.com/image/612/612/xif0q/track-pant/5/d/y/xxl-av104sl-combo-avolt-original-imagjgbwkggfp52e.jpeg?q=70',
-        favorite:false,
+        favorite:true,
 
     },
     {
