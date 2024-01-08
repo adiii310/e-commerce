@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Menswear } from './Menswear'
 import Utility from '../Components/Utility'
 
@@ -18,7 +18,6 @@ const Men = () => {
       setMensWearData(updatedData);
     }
   };
-
 
 
   return (

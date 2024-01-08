@@ -8,7 +8,7 @@ const Utility = ({ Incomingdata, handleFav }) => {
             <Link to={`/men/${item.id}`}>
 
                 <div className={`w-full h-full relative  cursor-pointer overflow-hidden  `} >
-                    <i className={`fa-solid fa-heart text-${item.favorite ? 'red-500' : 'black'} absolute right-0 mx-1 text-bolder `} onClick={(e) => handleFav(item.id, e)}></i>
+                    <i className={`fa-solid fa-heart ${item.favorite? 'text-red-500' : 'text-black'} absolute right-0 mx-1 text-bolder `} onClick={(e) => handleFav(item.id, e)}></i>
                     <img src={item.imgUrl} alt={item.alt} className={`w-full h-[75%] object-cover  md:object-contain`} />
                     <div className={`  h-[30%] w-full px-2 bg-white overflow-clip absolute -bottom-3 hover:bottom-0  duration-500 `}>
                         <div className='flex items-center my-1'>
