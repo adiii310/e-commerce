@@ -1,26 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import Navbar from "./Components/Navbar";
 
 import Home from "./Pages/Home";
 import Product from "./Pages/Product"
-import ProductDetails from "./Pages/ProductDetails";
+import ProductDetails from "./Components/ProductDetails";
 
 import Men from "./Catagories/Men";
 import Women from "./Catagories/Women";
 import New from "./Catagories/New";
 
 import './App.css';
+import { Menswear } from "./Catagories/Menswear";
 
 function App() {
-  const [api,setApi]= useState();
-    useEffect(()=>{
-      fetch('https://fakestoreapi.com/products')
-            .then(res=>res.json())
-            .then(json=>setApi(json))
-    },[])
-    console.log(api);
+  const [mensWearData,setMensWearData] = useState(Menswear)
+
+  const LOCAL_STORAGE_KEY = 'fav'
+  const handleFav = (id, e) => {
+    e.preventDefault();
+    const updatedData = [...mensWearData];
+    const itemIndex = updatedData.findIndex(item => item.id === id);
+
+    if (itemIndex !== -1) {
+      updatedData[itemIndex] = {
+        ...updatedData[itemIndex],
+        favorite: !updatedData[itemIndex].favorite,
+      };
+      const fav = updatedData.filter(item => item.favorite)
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(fav))
+      setMensWearData(updatedData);
+
+    }
+  };
   return (
     <>
     <BrowserRouter>
@@ -28,13 +41,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/product' element={<Product/>} />
-        <Route path="/men/:id" element={<ProductDetails/>} />
-        <Route path='/men' element={<Men/>} />
+        <Route path="/men/:id" element={<ProductDetails handleFav={(id,e)=>handleFav(id,e)}/>} />
+        <Route path='/men' element={<Men handleFav={(id,e)=>handleFav(id,e)}/>} />
         <Route path='/women' element={<Women/>} />
         <Route path='/new' element={<New/>} />
-
-
-
       </Routes>
     </BrowserRouter>
     </>

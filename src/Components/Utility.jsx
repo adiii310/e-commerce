@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Utility = ({ Incomingdata, handleFav }) => {
+const Utility = ({ Incomingdata, handleFav}) => {
 
     const data = Incomingdata.map(item => (
         <li key={item.id} className={` w-[48%] md:w-[19%] h-80 mx-auto md:mx-1 my-1 border-[1px] border-black `} >
-            <Link to={`/men/${item.id}`}>
+            <Link to={`/${item.category}/${item.id}`}>
 
                 <div className={`w-full h-full relative  cursor-pointer overflow-hidden  `} >
                     <i className={`fa-solid fa-heart ${item.favorite? 'text-red-500' : 'text-black'} absolute right-0 mx-1 text-bolder `} onClick={(e) => handleFav(item.id, e)}></i>

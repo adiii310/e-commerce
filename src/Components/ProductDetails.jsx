@@ -1,14 +1,48 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Menswear } from '../Catagories/Menswear'
 
 const ProductDetails = () => {
   const param = useParams();
-  console.log(param);
-  const data = Menswear.filter(item => item.id === param.id)
+
+  const LOCAL_STORAGE_KEY = 'fav'
+
+  const [mensWearData, setMensWearData] = useState(Menswear);
+  useEffect(() => {
+    const localData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (localData) {
+      const storedFavs = JSON.parse(localData);
+      const updatedMensWearData = mensWearData.map(item => {
+        const favItem = storedFavs.find(fav => fav.id === item.id);
+        return favItem ? { ...item, favorite: true } : item;
+      });
+      setMensWearData(updatedMensWearData);
+    }
+  }, []);
+
+  const handleFav = (id, e) => {
+    e.preventDefault();
+    const updatedData = [...mensWearData];
+    const itemIndex = updatedData.findIndex(item => item.id === id);
+
+    if (itemIndex !== -1) {
+      updatedData[itemIndex] = {
+        ...updatedData[itemIndex],
+        favorite: !updatedData[itemIndex].favorite,
+      };
+      const fav = updatedData.filter(item => item.favorite)
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(fav))
+      setMensWearData(updatedData);
+
+    }
+  };
+
+  const data = mensWearData.filter(item => item.id === param.id)
   const result = data.map(item => (
     <li key={item.id} className={` w-[100%] md:w-[19%] h-90   md:mx-1 my-1 border-[1px] `} >
       <div className={`w-full h-full relative  cursor-pointer overflow-hidden  `} >
+        <i className={`fa-solid fa-heart ${item.favorite ? 'text-red-500' : 'text-black'} text-2xl absolute right-2 top-2 mx-1 text-bolder `} onClick={(e) => handleFav(item.id, e)} ></i>
+
         <img src={item.imgUrl} alt={item.alt} className={`w-full h-[75%] object-contain `} />
 
       </div>
