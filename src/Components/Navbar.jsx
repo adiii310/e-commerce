@@ -43,7 +43,7 @@ const Navbar = () => {
                             </span>
                         </Link>
 
-                        <Link className={`${navStyle} `} title='Cart'> <i className="fa-solid fa-heart"></i></Link>
+                        <Link to={'/fav'} className={`${navStyle} `} title='Cart'> <i className="fa-solid fa-heart"></i></Link>
                         <Link className={`${navStyle} `} title='Cart'> <i className="fa-solid fa-cart-arrow-down"></i></Link>
                         <Link className={`${navStyle} `} title='Login'><i className="fa-solid fa-right-to-bracket"></i></Link>
                         {/* <Link className={navStyle}> <i className="fa-regular fa-address-card"></i></Link> --------Profile----- */}

@@ -2,10 +2,11 @@ import React, { useState ,useEffect} from 'react'
 import { Menswear } from './Menswear'
 import Utility from '../Components/Utility'
 
-const Men = () => {
+const Men = ({getMenData}) => {
   const [mensWearData, setMensWearData] = useState(Menswear);
   
   const LOCAL_STORAGE_KEY ='fav'
+
 
   useEffect(() => {
     const localData = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -32,9 +33,14 @@ const Men = () => {
       const fav= updatedData.filter(item=> item.favorite)
       localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(fav))
       setMensWearData(updatedData);
+      sendData(updatedData)
       
     }
   };
+
+  const sendData = (mensWearData) =>{
+    getMenData(mensWearData);
+  }
 
 
   return (

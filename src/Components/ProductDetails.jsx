@@ -1,30 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Menswear } from '../Catagories/Menswear'
 
-const ProductDetails = () => {
+const ProductDetails = ({Localkey,Localdata}) => {
   const param = useParams();
 
-  const LOCAL_STORAGE_KEY = 'fav'
+  const LOCAL_STORAGE_KEY = Localkey;
 
-  const [mensWearData, setMensWearData] = useState(Menswear);
-  useEffect(() => {
-    const localData = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (localData) {
-      const storedFavs = JSON.parse(localData);
-      const updatedMensWearData = mensWearData.map(item => {
-        const favItem = storedFavs.find(fav => fav.id === item.id);
-        return favItem ? { ...item, favorite: true } : item;
-      });
-      setMensWearData(updatedMensWearData);
-    }
-  }, []);
+  const [WearData, setWearData] = useState(Localdata);
+  
 
   const handleFav = (id, e) => {
     e.preventDefault();
-    const updatedData = [...mensWearData];
+    const updatedData = [...WearData];
     const itemIndex = updatedData.findIndex(item => item.id === id);
-
     if (itemIndex !== -1) {
       updatedData[itemIndex] = {
         ...updatedData[itemIndex],
@@ -32,14 +20,13 @@ const ProductDetails = () => {
       };
       const fav = updatedData.filter(item => item.favorite)
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(fav))
-      setMensWearData(updatedData);
-
+      setWearData(updatedData);
     }
   };
-
-  const data = mensWearData.filter(item => item.id === param.id)
+  const data = WearData.filter(item => item.id == param.id)
   const result = data.map(item => (
     <li key={item.id} className={` w-[100%] md:w-[19%] h-90   md:mx-1 my-1 border-[1px] `} >
+    <div>{item.id}</div>
       <div className={`w-full h-full relative  cursor-pointer overflow-hidden  `} >
         <i className={`fa-solid fa-heart ${item.favorite ? 'text-red-500' : 'text-black'} text-2xl absolute right-2 top-2 mx-1 text-bolder `} onClick={(e) => handleFav(item.id, e)} ></i>
 
@@ -68,7 +55,6 @@ const ProductDetails = () => {
 
     </li>
   ))
-  console.log(data)
   return (
     <div>
       <ul>

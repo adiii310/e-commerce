@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Utility = ({ Incomingdata, handleFav}) => {
 
     const data = Incomingdata.map(item => (
-        <li key={item.id} className={` w-[48%] md:w-[19%] h-80 mx-auto md:mx-1 my-1 border-[1px] border-black `} >
+        <li key={item.id} className={` w-[48%] md:w-[19%] h-80 mx-[2px] md:mx-1 my-1 border-[1px] border-black `} >
             <Link to={`/${item.category}/${item.id}`}>
 
                 <div className={`w-full h-full relative  cursor-pointer overflow-hidden  `} >
