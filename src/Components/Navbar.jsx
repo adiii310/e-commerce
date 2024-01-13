@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 
 import { Link } from 'react-router-dom'
 const Navbar = () => {
@@ -45,7 +45,7 @@ const Navbar = () => {
                         </Link>
 
                         <Link to={'/fav'} className={`${navStyle}  ${active === 'fav' && 'bg-black text-white'}`} onClick={() => setActive('fav')} title='Cart'> <i className="fa-solid fa-heart"></i></Link>
-                        <Link className={`${navStyle} ${active === 'cart' && 'bg-black text-white'} `} onClick={() => setActive('cart')} title='Cart'> <i className="fa-solid fa-cart-arrow-down"></i></Link>
+                        <Link to={'/cart'} className={`${navStyle} ${active === 'cart' && 'bg-black text-white'} `} onClick={() => setActive('cart')} title='Cart'> <i className="fa-solid fa-cart-arrow-down"></i></Link>
                         <Link className={`${navStyle}  ${active === 'login' && 'bg-black text-white'}`} onClick={() => setActive('login')} title='Login'><i className="fa-solid fa-right-to-bracket"></i></Link>
                         {/* <Link className={navStyle}> <i className="fa-regular fa-address-card"></i></Link> --------Profile----- */}
                     </div>

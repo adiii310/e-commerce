@@ -23,6 +23,7 @@ const Women = ({getWomenData}) => {
   const handleFav = (id, e) => {
     e.preventDefault();
     const updatedData = [...womensWearData];
+    console.log('thisisi  id' + id)
     const itemIndex = updatedData.findIndex(item => item.id === id);
 
     if (itemIndex !== -1) {
