@@ -14,9 +14,9 @@ const Cart = () => {
     // eslint-disable-next-line 
   }, []);
 
-  const removeCartItem = (id) =>{
-    const removedItem = cartItem.filter(item=> item.id != id);
-    localStorage.setItem('cart',JSON.stringify(removedItem))
+  const removeCartItem = (id) => {
+    const removedItem = cartItem.filter(item => item.id != id);
+    localStorage.setItem('cart', JSON.stringify(removedItem))
     setCartItem(removedItem);
   }
   const result = cartItem.map(item => <li key={item.id}>
@@ -26,7 +26,7 @@ const Cart = () => {
       </div>
       <div >
         <div className='flex items-center my-1'>
-          <b className='font-bold text-sm inline-block text-gray-400'>
+          <b className='font-bold text-sm inline-block '>
             {item.brand}
           </b>
           {
@@ -44,10 +44,10 @@ const Cart = () => {
         </div>
         <div >
           <span className=''>Qnt</span>
-          <button className='bg-white hover:bg-black text-black hover:text-white p-1 text-xs font-extrabold border-[1px] border-black mx-1'>+</button>{count}
-          <button className='bg-white hover:bg-black text-black hover:text-white p-1 text-xs font-extrabold border-[1px] border-black mx-1'>-</button>
+          <button className='bg-white hover:bg-black text-black hover:text-white p-1 text-xs font-extrabold border-[1px] border-black mx-1 drop-shadow-2xl'>+</button>{count}
+          <button className='bg-white hover:bg-black text-black hover:text-white p-1 text-xs font-extrabold border-[1px] border-black mx-1 drop-shadow-2xl'>-</button>
         </div>
-        <button className='bg-red-500 my-1 rounded-md p-1 text-xs text-white tracking-wide font-semibold' onClick={()=>removeCartItem(item.id)}>Remove Item</button>
+        <button className='bg-red-500 my-1 rounded-md p-1 text-xs text-white tracking-wide font-semibold' onClick={() => removeCartItem(item.id)}>Remove Item</button>
       </div>
 
     </div>
@@ -58,7 +58,13 @@ const Cart = () => {
         <ul>
           {result}
         </ul>
+        <div className='bg-orange-600 sticky bottom-1 left-full w-1/2 text-center text-white font-semibold tracking-wider p-1'>Place order</div>
       </div>
+      <footer className='w-full bg-gray-200 my-2 p-2 '>
+        <div className=''>Your Bill</div>
+
+        <div className=' h-40 w-full'>Total Item {cartItem.length}</div>
+      </footer>
     </>
 
 
