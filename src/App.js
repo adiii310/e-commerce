@@ -15,54 +15,10 @@ import Cart from "./Pages/Cart";
 import './App.css';
 import { Menswear } from "./Catagories/Menswear";
 import { WomensWear } from "./Catagories/WomensWear";
+import { NewWear } from "./Catagories/NewWear";
 
 
 function App() {
-
-  const [mensWearData, setMensWearData] = useState(Menswear);
-  const [womensWearData, setWomensWearData] = useState(WomensWear);
-
-
-  const LOCAL_STORAGE_KEY = 'fav'
-  const LOCAL_STORAGE_KEY2 = 'favWomen'
-  const LOCAL_KEY_CART = 'cart'
-
-
-  const fav = localStorage.getItem(LOCAL_STORAGE_KEY);
-  useEffect(() => {
-    const localData = fav
-    if (localData) {
-      const storedFavs = JSON.parse(localData);
-      const updatedMensWearData = mensWearData.map(item => {
-        const favItem = storedFavs.find(fav => fav.id === item.id);
-        return favItem ? { ...item, favorite: true } : item;
-      });
-      setMensWearData(updatedMensWearData);
-    }
-    // eslint-disable-next-line
-  }, [fav]);
-
-  const womenFav = localStorage.getItem(LOCAL_STORAGE_KEY2);
-  useEffect(() => {
-    const localData = womenFav
-    if (localData) {
-      const storedFavs = JSON.parse(localData);
-      const updatedWomensWearData = womensWearData.map(item => {
-        const favItem = storedFavs.find(fav => fav.id === item.id);
-        return favItem ? { ...item, favorite: true } : item;
-      });
-      setWomensWearData(updatedWomensWearData);
-    }
-    // eslint-disable-next-line
-  }, [womenFav]);
-
-  const getMenData = (data) => {
-    setMensWearData(data);
-  }
-  const getWomenData = (data) => {
-    setWomensWearData(data);
-  }
-
   return (
     <>
       <BrowserRouter>
@@ -70,11 +26,13 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path="/men/:id" element={<ProductDetails Localkey={LOCAL_STORAGE_KEY} Localdata={mensWearData} />} />
-          <Route path='/men' element={<Men getMenData={getMenData} />} />
-          <Route path='/women' element={<Women getWomenData={getWomenData} />} />
-          <Route path="/women/:id" element={<ProductDetails Localkey={LOCAL_STORAGE_KEY2} Localdata={womensWearData} />} />
+          <Route path='/men' element={<Men  />} />
+          <Route path="/men/:id" element={<ProductDetails  Localdata={Menswear} />} />
+          <Route path='/women' element={<Women />} />
+          <Route path="/women/:id" element={<ProductDetails Localdata={WomensWear} />} />
           <Route path='/new' element={<New />} />
+          <Route path="/new/:id" element={<ProductDetails Localdata={NewWear} />} />
+
           <Route path='/fav' element={<FavProduct />} />
           <Route path='/cart' element={<Cart />} />
 

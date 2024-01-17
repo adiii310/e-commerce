@@ -1,34 +1,19 @@
 import React, {  useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useFav } from '../hooks';
 
-const ProductDetails = ({Localkey,Localdata}) => {
+const ProductDetails = ({Localdata}) => {
   const param = useParams();
 
-  const LOCAL_STORAGE_KEY = Localkey;
 
-  const [WearData, setWearData] = useState(Localdata);
-  
+  const  { handleFav, favourite,inFav } = useFav();
 
-  const handleFav = (id, e) => {
-    e.preventDefault();
-    const updatedData = [...WearData];
-    const itemIndex = updatedData.findIndex(item => item.id === id);
-    if (itemIndex !== -1) {
-      updatedData[itemIndex] = {
-        ...updatedData[itemIndex],
-        favorite: !updatedData[itemIndex].favorite,
-      };
-      const fav = updatedData.filter(item => item.favorite)
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(fav))
-      setWearData(updatedData);
-    }
-  };
-  const data = WearData.filter(item => item.id == param.id)
+  const data = Localdata.filter(item => item.id == param.id)
   const result = data.map(item => (
     <li key={item.id} className={` w-[100%] md:w-[19%] h-90   md:mx-1 my-1 border-[1px] `} >
     <div>{item.id}</div>
       <div className={`w-full h-full relative  cursor-pointer overflow-hidden  `} >
-        <i className={`fa-solid fa-heart ${item.favorite ? 'text-red-500' : 'text-black'} text-2xl absolute right-2 top-2 mx-1 text-bolder `} onClick={(e) => handleFav(item.id, e)} ></i>
+        <i className={`fa-solid fa-heart ${inFav(item.id) ? 'text-red-500' : 'text-black'} text-2xl absolute right-2 top-2 mx-1 text-bolder `} onClick={(e) => handleFav(e,item.id,item)} ></i>
 
         <img src={item.imgUrl} alt={item.alt} className={`w-full h-[75%] object-contain `} />
 
