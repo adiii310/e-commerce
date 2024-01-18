@@ -1,44 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useFav } from '../hooks';
+import { useFav , useCart} from '../hooks';
 
 const Utility = ({ Incomingdata} ) => {
     const navigate = useNavigate();
-    const [cartItem, setCartItem] = useState([]);
+    // const [cartItem, setCartItem] = useState([]);
     const [zoomedId, setZoomedId] = useState(null);
-    const {handleFav,favourite,inFav} = useFav()
+    const {handleFav,inFav} = useFav()
+    const {inCart,handleCart} = useCart()
 
-    useEffect(() => {
-        const localData = localStorage.getItem('cart');
-        if (localData) {
-            setCartItem(JSON.parse(localData));
-        }
-    }, []);
-
-    const inCart = (id) => {
-        const found = cartItem.findIndex(item => item.id === id) != -1;
-
-        return found;
-    }
-
-    const handleCart = (e, id) => {
-        e.preventDefault();
-        const existingCartItem = cartItem;
-        const itemExists = existingCartItem.some(item => item.id === id);
-
-        if (!itemExists) {
-            const selectedItem = Incomingdata.find(item => item.id === id);
-            if (selectedItem) {
-                const updatedCartItems = [...existingCartItem, selectedItem];
-                setCartItem(updatedCartItems); 
-                localStorage.setItem('cart', JSON.stringify(updatedCartItems));
-                setZoomedId(id); 
-                setTimeout(() => setZoomedId(null), 500);
-            }
-        } else {
-            console.log('Item already added');
-        }
-    };
 
     const data = Incomingdata.map(item => (
         <li key={item.id} className={` w-[48%] md:w-[19%] h-80 mx-[2px] md:mx-1 my-1 border-[1px] border-black `} >
@@ -49,7 +19,7 @@ const Utility = ({ Incomingdata} ) => {
                     <i
                         className={`fa-solid ${inCart(item.id) ? 'fa-check ' : 'fa-plus '} duration-1000    mx-1 text-bolder transform ${zoomedId === item.id ? 'scale-125' : ''}`}
                         onClick={(e) => {
-                            handleCart(e, item.id, 'cart');
+                            handleCart(e, item.id,Incomingdata);
                             setZoomedId(item.id); 
                             setTimeout(() => setZoomedId(null), 500);
                         }}

@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import React from 'react'
+import { useCart } from '../hooks';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
-  const location = useLocation();
-  const [cartItem, setCartItem] = useState([]);
-  const count = 0;
-  useEffect(() => {
-    const localData = localStorage.getItem('cart');
-    if (localData) {
-      const cartItem = JSON.parse(localData);
-      setCartItem(cartItem)
-    }
-    // eslint-disable-next-line 
-  }, []);
+  const { cartItem, removeCartItem } = useCart()
 
-  const removeCartItem = (id) => {
-    const removedItem = cartItem.filter(item => item.id != id);
-    localStorage.setItem('cart', JSON.stringify(removedItem))
-    setCartItem(removedItem);
-  }
+  let count = 0;
   const result = cartItem.map(item => <li key={item.id}>
     <div className='bg-white my-1 py-1 flex '>
       <div className={`w-40 h-40 border-2 border-transparent hover:border-gray-500`}>
@@ -52,19 +39,32 @@ const Cart = () => {
 
     </div>
   </li>);
+  const sum = cartItem.reduce((acc, item) => acc + parseInt(item.SellingPrice, 10), 0);
+  const Orignal = cartItem.reduce((acc, item) => acc + parseInt(item.OrignalPrice, 10), 0);
+
   return (
     <>
       <div>
         <ul>
           {result}
         </ul>
-        <div className='bg-orange-600 sticky bottom-1 left-full w-1/2 text-center text-white font-semibold tracking-wider p-1'>Place order</div>
-      </div>
-      <footer className='w-full bg-gray-200 my-2 p-2 '>
-        <div className=''>Your Bill</div>
+        {sum !== 0 ?
+          <div className='bg-orange-600 sticky bottom-1 left-full w-1/2 text-center text-white font-semibold tracking-wider p-1'>Place order ({cartItem.length})</div> :
+          <Link to='/'>
+            <div className='bg-orange-600 mt-1 sticky bottom-1 left-full w-full text-center text-white font-semibold tracking-wider p-1'>Go For Shopping(cart empty)</div>
 
-        <div className=' h-40 w-full'>Total Item {cartItem.length}</div>
-      </footer>
+          </Link>
+
+        }
+      </div>
+      <div id='bill' className='w-full bg-gray-200 my-2 p-2 '>
+        <div className=''>Orignal Pice {Orignal}</div>
+        <div className=''>Saved Money -{Orignal-sum}</div>
+
+        <div className=''>Your Bill {sum}</div>
+
+
+      </div>
     </>
 
 
