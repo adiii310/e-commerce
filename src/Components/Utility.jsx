@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+
 import { useFav , useCart} from '../hooks';
+
+
 
 const Utility = ({ Incomingdata} ) => {
     const navigate = useNavigate();
-    // const [cartItem, setCartItem] = useState([]);
     const [zoomedId, setZoomedId] = useState(null);
+
     const {handleFav,inFav} = useFav()
     const {inCart,handleCart} = useCart()
+
 
 
     const data = Incomingdata.map(item => (
