@@ -1,8 +1,13 @@
 import React from 'react'
+import Utility from '../Components/Utility'
+import { NewWear } from './NewWear';
 
 const New = () => {
   return (
-    <div>New</div>
+    <>
+      <Utility Incomingdata={NewWear} />
+    </>
+
   )
 }
 

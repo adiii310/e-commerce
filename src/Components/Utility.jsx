@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useFav } from '../hooks';
 
-const Utility = ({ Incomingdata, handleFav }) => {
+const Utility = ({ Incomingdata} ) => {
     const navigate = useNavigate();
     const [cartItem, setCartItem] = useState([]);
     const [zoomedId, setZoomedId] = useState(null);
-
+    const {handleFav,favourite,inFav} = useFav()
 
     useEffect(() => {
         const localData = localStorage.getItem('cart');
@@ -13,7 +14,6 @@ const Utility = ({ Incomingdata, handleFav }) => {
             setCartItem(JSON.parse(localData));
         }
     }, []);
-
 
     const inCart = (id) => {
         const found = cartItem.findIndex(item => item.id === id) != -1;
@@ -57,8 +57,8 @@ const Utility = ({ Incomingdata, handleFav }) => {
 
 
                     <i
-                        className={`fa-solid fa-heart ${item.favorite ? 'text-red-500' : 'text-black'}  mx-1 text-bolder  `}
-                        onClick={(e) => handleFav(item.id, e)}
+                        className={`fa-solid fa-heart ${inFav(item.id) ? 'text-red-500' : 'text-black'}  mx-1 text-bolder  `}
+                        onClick={(e) => handleFav(e,item.id,item)}
 
                     ></i>
                     </div>
