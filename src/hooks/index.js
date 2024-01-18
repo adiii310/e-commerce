@@ -1,3 +1,4 @@
 import { useFav } from "./useFav"
+import { useCart } from "./useCart"
 
-export {useFav}
+export {useFav,useCart}
