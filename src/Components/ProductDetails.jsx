@@ -41,8 +41,8 @@ const ProductDetails = ({Localdata}) => {
     </li>
   ))
   return (
-    <div>
-      <ul>
+    <div className='min-h-screen'>
+      <ul className='min-h-scree'>
         {result}
       </ul>
     </div>
