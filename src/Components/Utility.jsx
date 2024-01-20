@@ -1,40 +1,59 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-import { useFav , useCart} from '../hooks';
+import { useFav, useCart } from '../hooks';
 
 
 
-const Utility = ({ Incomingdata} ) => {
-    const navigate = useNavigate();
+const Utility = ({ Incomingdata }) => {
+    const Location = useLocation();
+    console.log(Location)
+    const [productData, setProductData] = useState(Incomingdata)
     const [zoomedId, setZoomedId] = useState(null);
 
-    const {handleFav,inFav} = useFav()
-    const {inCart,handleCart} = useCart()
+    const [dropDown, setDropDown] = useState(false)
+    const [sort, setSort] = useState({ lowHigh: false, highLow: false })
+
+    const { handleFav, inFav } = useFav()
+    const { inCart, handleCart } = useCart()
+
+    const sorting = (data) => {
+        const sortedArray = [...productData].sort((a, b) => {
+            if (data === 'lowHigh') {
+                setSort({ highLow: false, lowHigh: true })
+                return parseInt(a.SellingPrice) - parseInt(b.SellingPrice);
+            } else if (data === 'highLow') {
+                setSort({ lowHigh: false, highLow: true })
+                return parseInt(b.SellingPrice) - parseInt(a.SellingPrice);
+
+            }
+        });
+        setProductData(sortedArray)
+
+    }
 
 
-
-    const data = Incomingdata.map(item => (
+    const data = productData.map(item => (
         <li key={item.id} className={` w-[48%] md:w-[19%] h-80 mx-[2px] md:mx-1 my-1 border-[1px] border-black `} >
             <Link to={`/${item.category}/${item.id}`}>
 
                 <div className={`w-full h-full relative  cursor-pointer  overflow-hidden `} >
                     <div className='bg-white w-full  relative top-0 flex justify-between'>
-                    <i
-                        className={`fa-solid ${inCart(item.id) ? 'fa-check ' : 'fa-plus '} duration-1000    mx-1 text-bolder transform ${zoomedId === item.id ? 'scale-125' : ''}`}
-                        onClick={(e) => {
-                            handleCart(e, item.id,Incomingdata);
-                            setZoomedId(item.id); 
-                            setTimeout(() => setZoomedId(null), 500);
-                        }}
-                    ></i>
+                        <i
+                            className={`fa-solid ${inCart(item.id) ? 'fa-check ' : 'fa-plus '} duration-1000    mx-1 text-bolder transform ${zoomedId === item.id ? 'scale-125' : ''}`}
+                            onClick={(e) => {
+                                handleCart(e, item.id, Incomingdata);
+                                setZoomedId(item.id);
+                                setTimeout(() => setZoomedId(null), 500);
+                            }}
+                        ></i>
 
 
-                    <i
-                        className={`fa-solid fa-heart ${inFav(item.id) ? 'text-red-500' : 'text-black'}  mx-1 text-bolder  `}
-                        onClick={(e) => handleFav(e,item.id,item)}
+                        <i
+                            className={`fa-solid fa-heart ${inFav(item.id) ? 'text-red-500' : 'text-black'}  mx-1 text-bolder  `}
+                            onClick={(e) => handleFav(e, item.id, item)}
 
-                    ></i>
+                        ></i>
                     </div>
 
                     <img src={item.imgUrl} alt={item.alt} className={`w-full h-[75%] object-cover  md:object-contain`} />
@@ -70,11 +89,35 @@ const Utility = ({ Incomingdata} ) => {
 
         </li>
     ))
-    return (
-        <div> <ul className='flex flex-wrap  my-2  w-full min-h-screen'>
-            {data}
 
-        </ul></div>
+    return (
+
+        <div>
+            {
+                Location.pathname !== '/fav' &&
+            <div className='flex items-center'>
+                <div className='py-1 px-2 m-2  bg-gray-800 text-white font-bold text-sm inline relative cursor-pointer select-none' onClick={() => setDropDown(!dropDown)}>sort
+                    {
+                        dropDown &&
+                        <div className='text-black bg-white absolute z-10 left-0 w-32 rounded-r-xl my-1 border-2 border-black'>
+
+                            <div className='hover:text-white hover:bg-black p-1 duration-500' onClick={() => sorting('lowHigh')}>Low To High</div>
+                            <div className='hover:text-white hover:bg-black p-1 duration-500' onClick={() => sorting('highLow')}>High To Low</div>
+                        </div>
+                    }
+
+                </div>
+                {
+                    (sort.lowHigh || sort.highLow) &&
+                    <div className='text-xs border-2 border-black p-1 rounded-md'>{sort.lowHigh && "Low To High"} {sort.highLow && "High To Low"} <span className='font-bold ml-2 cursor-pointer h-full ' onClick={() => { setSort({ lewHigh: false, highLow: false }); setProductData(Incomingdata) }}>x</span></div>
+                }
+            </div>
+            }
+            <ul className='flex flex-wrap w-full min-h-screen'>
+                {data}
+
+            </ul>
+        </div>
     )
 }
 

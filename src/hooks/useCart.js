@@ -6,7 +6,6 @@ export const useCart = () => {
         const localData = localStorage.getItem('cart');
         if (localData) {
             const cartItem = JSON.parse(localData);
-            console.log(cartItem);
             setCartItem(cartItem)
         }
     }, []);
