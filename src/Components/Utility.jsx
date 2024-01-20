@@ -19,7 +19,7 @@ const Utility = ({ Incomingdata} ) => {
             <Link to={`/${item.category}/${item.id}`}>
 
                 <div className={`w-full h-full relative  cursor-pointer  overflow-hidden `} >
-                    <div className='bg-white w-full z-20 relative top-0 flex justify-between'>
+                    <div className='bg-white w-full  relative top-0 flex justify-between'>
                     <i
                         className={`fa-solid ${inCart(item.id) ? 'fa-check ' : 'fa-plus '} duration-1000    mx-1 text-bolder transform ${zoomedId === item.id ? 'scale-125' : ''}`}
                         onClick={(e) => {
@@ -71,7 +71,7 @@ const Utility = ({ Incomingdata} ) => {
         </li>
     ))
     return (
-        <div> <ul className='flex flex-wrap  my-2  w-full h-auto'>
+        <div> <ul className='flex flex-wrap  my-2  w-full min-h-screen'>
             {data}
 
         </ul></div>

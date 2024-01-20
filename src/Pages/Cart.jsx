@@ -44,8 +44,8 @@ const Cart = () => {
 
   return (
     <>
-      <div>
-        <ul>
+      <div >
+        <ul className='min-h-screen' >
           {result}
         </ul>
         {sum !== 0 ?
@@ -56,15 +56,17 @@ const Cart = () => {
           </Link>
 
         }
+
       </div>
       <div id='bill' className='w-full bg-gray-200 my-2 p-2 '>
         <div className=''>Orignal Pice {Orignal}</div>
-        <div className=''>Saved Money -{Orignal-sum}</div>
+        <div className=''>Saved Money -{Orignal - sum}</div>
 
         <div className=''>Your Bill {sum}</div>
 
 
       </div>
+
     </>
 
 

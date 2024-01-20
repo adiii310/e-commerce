@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
 import Home from "./Pages/Home";
 import ProductDetails from "./Components/ProductDetails";
@@ -26,8 +27,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/men' element={<Men  />} />
-          <Route path="/men/:id" element={<ProductDetails  Localdata={Menswear} />} />
+          <Route path='/men' element={<Men />} />
+          <Route path="/men/:id" element={<ProductDetails Localdata={Menswear} />} />
           <Route path='/women' element={<Women />} />
           <Route path="/women/:id" element={<ProductDetails Localdata={WomensWear} />} />
           <Route path='/new' element={<New />} />
@@ -35,8 +36,9 @@ function App() {
 
           <Route path='/fav' element={<FavProduct />} />
           <Route path='/cart' element={<Cart />} />
-
         </Routes>
+
+        <Footer />
       </BrowserRouter>
     </>
   );
