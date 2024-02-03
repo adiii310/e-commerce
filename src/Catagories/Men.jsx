@@ -1,6 +1,6 @@
 import React from 'react'
 import { Menswear } from '../Data/Menswear'
-import Utility from '../Components/Utility'
+import {Utility} from '../Components'
 
 const Men = () => {  
   return (

@@ -1,15 +1,12 @@
 import './App.css';
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {Footer, Navbar, ProductDetails,Utility} from "./Components/index"
-import {Cart,FavProduct,Home} from "./Pages/index"
-
+import {Footer, Navbar, ProductDetails,Utility} from "./Components"
+import {Cart,FavProduct,Home} from "./Pages"
+import {Men,Women,New} from './Catagories'
 import { Menswear } from "./Data/Menswear";
 import { WomensWear } from "./Data/WomensWear";
 import { NewWear } from "./Data/NewWear";
-import Men from './Catagories/Men';
-import Women from './Catagories/Women';
-import New from './Catagories/New';
 
 function App() {
   return (
