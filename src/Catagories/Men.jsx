@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menswear } from './Menswear'
+import { Menswear } from '../Data/Menswear'
 import Utility from '../Components/Utility'
 
 const Men = () => {  

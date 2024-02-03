@@ -7,7 +7,9 @@ import {Cart,FavProduct,Home} from "./Pages/index"
 import { Menswear } from "./Data/Menswear";
 import { WomensWear } from "./Data/WomensWear";
 import { NewWear } from "./Data/NewWear";
-
+import Men from './Catagories/Men';
+import Women from './Catagories/Women';
+import New from './Catagories/New';
 
 function App() {
   return (
@@ -16,13 +18,13 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/men' element={<Utility Incomingdata={Menswear} />} />
+          <Route path='/men' element={<Men Incomingdata={Menswear} />} />
           <Route path="/men/:id" element={<ProductDetails Localdata={Menswear} />} />
 
-          <Route path='/women' element={<Utility Incomingdata={WomensWear} />} />
+          <Route path='/women' element={<Women Incomingdata={WomensWear} />} />
           <Route path="/women/:id" element={<ProductDetails Localdata={WomensWear} />} />
 
-          <Route path='/new' element={<Utility Incomingdata={NewWear} />}/>
+          <Route path='/new' element={<New Incomingdata={NewWear} />}/>
           <Route path="/new/:id" element={<ProductDetails Localdata={NewWear} />} />
 
           <Route path='/fav' element={<FavProduct />} />
