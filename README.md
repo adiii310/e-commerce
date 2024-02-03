@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+# Intorduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- This is an e-commerce website made with react , this project use dymaic routing and uses static data to show the product detail, No api is used in this project.
 
-## Available Scripts
+- This Project only showcases my react knowledge and some what designing skiil.
+- I made this project to enhance my skills and how to build logic while working on some real life project.
 
-In the project directory, you can run:
+# Table Of Content
 
-### `npm start`
+- [Use of React Router Dom](#react-router-dom)
+- [From Where The Data Is Coming](#static-data)
+- [use of ContextAPI](#context-api)
+- [Hooks Used](#hooks)
+- [Navbar Component](#navbar)
+- [ Utility Component](#utility-component)
+- [Product Detail Component](#product-detail-page)
+- [category](#men-women-new-page)
+- [Cart Mangement](#cart-page)
+- [Favourite Itme](#fav-page)
+- [footer Component](#footer)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# WorkFlow
 
-### `npm run build`
+## React Router Dom
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- react-router-dom package is used to make the dynamic routing and accoring to the path the component is lodaed
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Static Data
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> Data Used to show the product is Static
+- we have the array of object and we loop through themn to show the product.
+- for diffrent pages we have diffrent set of data.
+- we will try to make the data dymaic in future.
 
-### `npm run eject`
+## Context Api
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+> `context api` will be used to store the data at single place so that every component can acees it
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- This feature is `not applied` yet
+- for Now The data is fetched from the data folder and data is passed from parent to child
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Hooks
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. ` UseCart Hook`
 
-## Learn More
+- This hook is used to add item to cart and also to acess the itme from cart.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- cart items are stoered in Local Storage.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. `UseFav Hook`
 
-### Code Splitting
+- This hook is used to Acess the fav item and to add Fav Item.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- All the fav items are stoerd in The Local Storage.
 
-### Analyzing the Bundle Size
+## Navbar
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- we have diffrent sction such as
+  1. Mens Category
+  1. Womens Category
+  1. New Collection Categoru
+- on the other side of nav bar we have
+  1. Search box
+  1. Favourite Items
+  1. Cart
+  1. Login/ SignUp Section
 
-### Making a Progressive Web App
+## Utility Component
+> Utility Component Takes data loop through it and show all the data in card format
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- This component is used inside all the categorise such as ` Men , Women ,New `
 
-### Advanced Configuration
+- It takes the prop ` Incoming Data` which contain product Details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- It loops Through this incoming Data and form the Card view of all the product.
 
-### Deployment
+- It have `2 Buttoons` 
+    - Add To Fav
+    - Add To Cart
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Product Detail Page
 
-### `npm run build` fails to minify
+> This page is used to show the full Description About the product 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- From the url it takes the product id with the help of  `useParams()` hook
+- It filter the Product which has the same id and view only that.
+
+
+## Men Women New Page
+>We have static data for `Men` `Women` `New ` as  `Menswear`, `WomensWear`,`NewWear` respectively
+
+## Cart Page 
+
+>It fetch the data from the local Storage `key` = `Cart`
+
+- It display all the product and generate the bill
+
+- The itme present in the cart will have `Tick` Symbol on them 
+
+-The item not present in cart will have `Plus` Symbom on them
+
+## Fav Page
+> This page contains all the item You marekd as fav
+
+- The item marked as fav will have `Red Heart` 
+- Item not markd as fav will have `Black Heart`
+
+## Login Page
+> Not Ready Yet.
+
+## Footer
+> this component contains detail regarding the company and also about the publisher
