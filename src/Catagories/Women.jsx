@@ -1,6 +1,6 @@
 import React, { useState ,useEffect} from 'react'
 import Utility from '../Components/Utility'
-import { WomensWear } from './WomensWear';
+import { WomensWear } from '../Data/WomensWear';
 
 const Women = () => {
   
