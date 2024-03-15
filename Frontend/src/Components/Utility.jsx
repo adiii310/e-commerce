@@ -88,12 +88,12 @@ const Utility = ({ Incomingdata }) => {
             <div>
               <span className={`text-xs`}>${item.SellingPrice}</span>
               <span className={`text-xs mx-2 text-gray-500 `}>
-                <strike>${item.OrignalPrice}</strike>{" "}
+                <strike>${item.OriginalPrice}</strike>{" "}
               </span>
               <span className={`text-xs  text-green-700 font-bold `}>
                 {Math.floor(
-                  ((item.OrignalPrice - item.SellingPrice) /
-                    item.OrignalPrice) *
+                  ((item.OriginalPrice - item.SellingPrice) /
+                    item.OriginalPrice) *
                     100
                 )}
                 % Off{" "}
