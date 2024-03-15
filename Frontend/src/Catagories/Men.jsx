@@ -1,14 +1,16 @@
-import React from 'react'
-import { Menswear } from '../Data/Menswear'
-import {Utility} from '../Components'
+import React from "react";
+import { Utility } from "../Components";
+import { useData } from "../context/data.context";
 
-const Men = () => {  
+const Men = () => {
+  const { AllProductData } = useData();
+  const mensData = AllProductData.filter((data) => data.category === "men");
+
   return (
     <>
-      <Utility Incomingdata={Menswear} />
+      <Utility Incomingdata={mensData} />
     </>
+  );
+};
 
-  )
-}
-
-export default Men
+export default Men;
